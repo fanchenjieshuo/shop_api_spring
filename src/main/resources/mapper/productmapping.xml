@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper:根标签，namespace：命名空间，随便写，一般保证命名空间唯一 -->
+
+<mapper namespace="com.fh.dao.ProductDao">
+
+
+    <select id="queryProductCartById" parameterType="java.lang.Integer" resultType="com.fh.model.vo.ProductCart">
+         select id,name,image as imgPath,price from shop_product where id=#{pid}
+    </select>
+
+
+
+    <update id="updateProductCount">
+        /* 保证 商品的超卖问题    uopdate  add  delete  返回影响的数据条数*/
+        update shop_product set count=count-#{count} where id=#{id} and count-#{count}>=0
+    </update>
+
+
+
+
+    <select id="queryAreaNameById" parameterType="java.lang.String" resultType="java.lang.String">
+        select name from shop_area where id=#{id}
+    </select>
+
+
+</mapper>
